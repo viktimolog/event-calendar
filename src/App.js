@@ -5,7 +5,7 @@ import HeaderContainer from 'containers/HeaderContainer'
 
 const App = () => (
   <div>
-    <HeaderContainer/>
+    {/* <HeaderContainer/> */}
     <ItemsContainer/>
   </div>
 )

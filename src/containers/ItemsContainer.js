@@ -1,40 +1,98 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Items from '../components/Items'
-import Search from '../components/Search'
-import { getItems, setCurItem, findItems } from '../actions/actionCreator'
+import Items from 'components/Items'
+import Header from 'components/Header'
+
+import { getItems, setCurItem, findItems } from 'actions/actionCreator'
+
+const dayTime = 86400000;
 
 class ItemsContainer extends React.Component {
 
-  componentDidMount() {
-    this.props.getItems(this.getCurMonth())
+  state = {
+    month: [],
+    firstDayMonth: null,
+    lastDayMonth: null,
+    countMonth: null,
+    year: null,
+    events: []
   }
 
-  getCurMonth = () => {
-    const dayTime = 86400000
+  componentDidMount() {
+    // this.props.getItems(this.getCurMonth())
+    this.getCurMonth(new Date())
+  }
+
+  handleRight = () => {
+    this.getCurMonth(new Date(this.state.lastDayMonth.getTime() + dayTime))
+  }
+
+  handleLeft = () => {
+    this.getCurMonth(new Date(this.state.firstDayMonth.getTime() - dayTime))
+  }
+
+  getCurMonth = date => {
     let month = []
-    let date = new Date()
+
+    // alert('date.getMonth()='+date.getMonth())//ok
+
     // let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
-    let firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
+    const firstDayMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    const lastDayMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+    // alert('lastDayMonth = '+lastDayMonth)//ok
+
     // alert(firstDay.getDay())//3 ok
-    let one = firstDay.getTime() - (firstDay.getDay() - 1) * dayTime
+
+    let firstDayScreen;
+
+    if (firstDayMonth.getDay() === 0) firstDayScreen = firstDayMonth.getTime() - 6 * dayTime
+
+    else firstDayScreen = firstDayMonth.getTime() - (firstDayMonth.getDay() - 1) * dayTime
+
+    // alert('firstDayScreen = ' + new Date(firstDayScreen))
+
+    const lastDayScreen = firstDayScreen + 42 * dayTime;
 
     // alert(new Date(one))//OK 30/07
 
-    for (let i = one; i < one + 42 * dayTime; i += dayTime)
+    for (let i = firstDayScreen; i < lastDayScreen; i += dayTime)
       month.push(i)
+    // month.push(new Date(i))//00-00-00
     // console.log('month=', month)//ok
-    return month;
+    this.setState({
+      month,
+      firstDayMonth,
+      lastDayMonth,
+      countMonth: date.getMonth(),
+      year: date.getFullYear(),
+      events: this.props.events
+        .filter(event => event.date >= firstDayScreen)
+        .filter(event => event.date < lastDayScreen + dayTime)
+    })
+    // return month;
   }
 
   render() {
+    // console.log(this.props.events)//ok
     return (
       <div>
+        <Header
+          countMonth={this.state.countMonth}
+          year={this.state.year}
+          handleRight={this.handleRight}
+          handleLeft={this.handleLeft}
+        />
         {/* <Search findItems={this.props.findItems} /> */}
         <Items
-          items={this.props.items}
-          setCurItem={this.props.setCurItem} />
+          // items={this.props.items}
+          items={this.state.month}
+          // events={this.state.events}
+          events={this.props.events}
+
+        // setCurItem={this.props.setCurItem}
+        />
       </div>)
   }
 }
@@ -46,8 +104,22 @@ ItemsContainer.propTypes = {
   findItems: PropTypes.func.isRequired
 }
 
+// const getEventsFromState = state => state.mainReducer.events;
+
+// const getCurEvents = createSelector(
+//   getEventsFromState,
+//   (events) => {    
+//     return events
+//       .filter(event => event.date > this.state.firstDayScreen)
+//       .filter(event => event.date < this.state.lastDayScreen - 1)
+//   }
+// )
+
+
+//здесь будет выборка после reselect, он получит сразу только те ивенты, что попадают в период - не будет
 const mapStateToProps = state => ({
-  items: state.mainReducer.items
+  events: state.mainReducer.events,
+  // events: getCurEvents(state)
 })
 
 const mapDispatchToProps = {

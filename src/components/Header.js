@@ -21,39 +21,53 @@ const styles = theme => ({
     }
 });
 
-function Header(props) {
-    const { classes } = props;
-    return (
-        <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <div style={{ display: 'flex', width: '40%', justifyContent: 'flex-start', alignItems: 'center' }}>
-                <Button color="primary" style={{ fontSize: '16px' }}
-                >
-                    {TextConstants.TODAY}
-                </Button>
-                <IconButton color="primary" onClick={() => { alert('onClick Left') }}
-                >
-                    <ChevronLeft />
-                </IconButton>
-                <IconButton color="primary" onClick={() => { alert('onClick Right') }}
-                >
-                    <ChevronRight />
-                </IconButton>
-                <Button color="primary" style={{ fontSize: '16px' }}
-                >
-                   Пока июнь 2018
-                </Button>
+// function Header(props) {
+class Header extends React.Component {
+
+    onClickRight = () => {
+        this.props.handleRight()
+    }
+
+    onClickLeft = () => {
+        this.props.handleLeft()
+    }
+
+    render() {
+        const { classes } = this.props;
+        return (
+            <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-start', alignItems: 'center' }}>
+                <div style={{ display: 'flex', width: '40%', justifyContent: 'flex-start', alignItems: 'center' }}>
+                    <Button color="primary" style={{ fontSize: '16px' }}
+                    >
+                        {TextConstants.TODAY}
+                    </Button>
+                    <IconButton color="primary" onClick={this.onClickLeft}
+                    >
+                        <ChevronLeft />
+                    </IconButton>
+                    <IconButton color="primary" onClick={this.onClickRight}
+                    >
+                        <ChevronRight />
+                    </IconButton>
+                    <Button color="primary" style={{ fontSize: '16px' }}>
+                        {TextConstants.MONTHS[this.props.countMonth]}
+                    </Button>
+                    <Button color="primary" style={{ fontSize: '16px' }}>
+                        {this.props.year}
+                    </Button>
+                </div>
+                <div style={{ display: 'flex', width: '60%', justifyContent: 'flex-end', alignItems: 'center', marginRight: '20px' }}>
+                    <Button variant="contained" color="primary" className={classes.button} onClick={() => { alert('onClick Add') }}>
+                        {TextConstants.ADD}
+                    </Button>
+                    <Button variant="contained" color="primary" className={classes.button} onClick={() => { alert('onClick Update') }}>
+                        {TextConstants.UPDATE}
+                    </Button>
+                    <Search />
+                </div>
             </div>
-            <div style={{ display: 'flex', width: '60%', justifyContent: 'flex-end', alignItems: 'center', marginRight: '20px' }}>
-                <Button variant="contained" color="primary" className={classes.button} onClick={() => { alert('onClick Add') }}>
-                    {TextConstants.ADD}
-                </Button>
-                <Button variant="contained" color="primary" className={classes.button} onClick={() => { alert('onClick Update') }}>
-                    {TextConstants.UPDATE}
-                </Button>
-                <Search/>
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 Header.propTypes = {
