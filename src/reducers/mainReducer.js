@@ -1,9 +1,9 @@
 import {
   FIND_ITEMS,
-  GET_ITEMS,
-  SET_CURITEM,
   ADD_EVENT,
-  EDIT_EVENT
+  EDIT_EVENT,
+  GET_EVENTS,
+  DEL_EVENT
 } from 'actions/actionTypes'
 
 //30/07 and 31/07
@@ -12,28 +12,30 @@ import {
 const initialState = {
   items: [],
   curItem: false,
-  events: [
-    {
-      id: 0,
-      date: 1532898000000,
-      text: 'event 1 30/07/18'
-    },
-    {
-      id: 1,
-      date: 1532898001000,
-      text: 'event 2 30/07/18'
-    },
-    {
-      id: 2,
-      date: 1533070800000,
-      text: 'event 01/08/18'
-    },
-  ]
+  events:[]
+  // events: [
+  //   {
+  //     id: 0,
+  //     date: 1532898000000,
+  //     text: 'event 1 30/07/18'
+  //   },
+  //   {
+  //     id: 1,
+  //     date: 1532898001000,
+  //     text: 'event 2 30/07/18'
+  //   },
+  //   {
+  //     id: 2,
+  //     date: 1533070800000,
+  //     text: 'event 01/08/18'
+  //   },
+  // ]
 }
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
     case EDIT_EVENT: {
+      localStorage.setItem('events', JSON.stringify([...state.events.filter(event => event.id !== action.event.id), action.event]))
       return {
         ...state,
         events: [...state.events.filter(event => event.id !== action.event.id), action.event]
@@ -41,23 +43,26 @@ const mainReducer = (state = initialState, action) => {
     }
 
     case ADD_EVENT: {
+      localStorage.setItem('events', JSON.stringify([...state.events, action.event]))
       return {
         ...state,
         events: [...state.events, action.event]
       }
     }
 
-    case GET_ITEMS: {
+    case DEL_EVENT: {
+      localStorage.setItem('events', JSON.stringify([...state.events.filter(event => event.id !== action.id)]))
       return {
         ...state,
-        items: action.month
+        events: [...state.events.filter(event => event.id !== action.id)]
       }
     }
 
-    case SET_CURITEM: {
+    case GET_EVENTS: {
       return {
         ...state,
-        curItem: action.curItem
+        events: action.events
+        // events: JSON.parse(localStorage.getItem('events'))
       }
     }
 

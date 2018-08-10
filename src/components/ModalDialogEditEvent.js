@@ -34,7 +34,7 @@ class ModalDialogEditEvent extends React.Component {
 
     state = {
         open: false,
-        date: new Date(this.props.event.date),//nah
+        date: new Date(this.props.event.date),
         newNameEvent: this.props.event.text
     };
 
@@ -64,11 +64,16 @@ class ModalDialogEditEvent extends React.Component {
     };
 
     handleOpen = () => {
-        this.setState({ open: true });
+        this.setState({ open: true, newNameEvent: this.props.event.text });
     };
 
     handleClose = () => {
-        this.setState({ open: false, newNameEvent: this.props.event.text});
+        this.setState({ open: false, newNameEvent: this.props.event.text });
+    };
+
+    handleDelete = () => {
+        this.props.delEvent(this.props.event.id);
+        this.handleClose();
     };
 
     render() {
@@ -92,15 +97,14 @@ class ModalDialogEditEvent extends React.Component {
                             <Grid item xs={12} sm={12} md={12}>
                                 <Card>
                                     <Grid container>
-                                        <Grid item xs={12} sm={12} md={4}>
+                                        <Grid item xs={12} sm={12} md={3}>
                                             <DatePicker
                                                 label={TextConstants.CHOICEDATE}
                                                 handleDate={this.handleDate}
-                                                // date={this.state.date}
                                                 date={event.date}
                                             />
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={4}>
+                                        <Grid item xs={12} sm={12} md={6}>
                                             <Input
                                                 style={{ display: 'flex', width: '90%', marginTop: '17px' }}
                                                 placeholder={TextConstants.INPUTEVENT}
@@ -113,7 +117,7 @@ class ModalDialogEditEvent extends React.Component {
                                                 }}
                                             />
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={2}>
+                                        <Grid item xs={12} sm={12} md={1}>
                                             <Button
                                                 variant="contained"
                                                 style={{ display: 'flex', width: '90%', justifyContent: 'center', marginTop: '10px' }}
@@ -122,13 +126,22 @@ class ModalDialogEditEvent extends React.Component {
                                                 {TextConstants.EDIT}
                                             </Button>
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={2}>
+                                        <Grid item xs={12} sm={12} md={1}>
+                                            <Button
+                                                variant="contained"
+                                                style={{ display: 'flex', width: '90%', justifyContent: 'center', marginTop: '10px' }}
+                                                color="inherit"
+                                                onClick={this.handleClose}>
+                                                {TextConstants.EXIT}
+                                            </Button>
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={1}>
                                             <Button
                                                 variant="contained"
                                                 style={{ display: 'flex', width: '90%', justifyContent: 'center', marginTop: '10px' }}
                                                 color="secondary"
-                                                onClick={this.handleClose}>
-                                                {TextConstants.EXIT}
+                                                onClick={this.handleDelete}>
+                                                {TextConstants.DELETE}
                                             </Button>
                                         </Grid>
                                     </Grid>
@@ -146,6 +159,7 @@ ModalDialogEditEvent.propTypes = {
     classes: PropTypes.object.isRequired,
     addEvent: PropTypes.func.isRequired,
     editEvent: PropTypes.func.isRequired,
+    delEvent: PropTypes.func.isRequired,
     event: PropTypes.object.isRequired
 };
 

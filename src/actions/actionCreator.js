@@ -1,14 +1,10 @@
 import {
-  GET_ITEMS,
-  SET_CURITEM,
   FIND_ITEMS,
   ADD_EVENT,
-  EDIT_EVENT
+  EDIT_EVENT,
+  GET_EVENTS,
+  DEL_EVENT
 } from './actionTypes'
-
-import {
-  GetItems
-} from './axiosRequests'
 
 export const editEvent = event => dispatch => {
   dispatch({
@@ -17,58 +13,47 @@ export const editEvent = event => dispatch => {
   })
 }
 
-export const addEvent = event => dispatch => {
+
+export const addEvent = event => dispatch => {  
   dispatch({
     type: ADD_EVENT,
     event
   })
 }
 
-export const getItems = month => dispatch => {
+export const delEvent = id => dispatch => {  
   dispatch({
-    type: GET_ITEMS,
-    month
+    type: DEL_EVENT,
+    id
   })
-  // GetItems()
-  //   .then(res => {
-  //       dispatch({
-  //         type: GET_ITEMS,
-  //         payload: res.data
-  //       })
-  //     }
-  //   )
-  //   .catch(err => {
-  //       console.log(err.toString())
-  //       dispatch({
-  //         type: GET_ITEMS,
-  //         payload: []
-  //       })
-  //     }
-  //   )
 }
 
-export const setCurItem = curItem => dispatch => {
+export const getEvents = () => dispatch => {
+  let events = [];
+  if (localStorage.getItem('events')) {
+    events = JSON.parse(localStorage.getItem('events'))
+  }
   dispatch({
-    type: SET_CURITEM,
-    curItem
+    type: GET_EVENTS,
+    events
   })
 }
 
 export const findItems = text => dispatch => {
-  GetItems()
-    .then(res =>
-      dispatch({
-        type: FIND_ITEMS,
-        data: res.data,
-        text: text
-      })
-    )
-    .catch(err => {
-        console.log(err.toString())
-        dispatch({
-          type: GET_ITEMS,
-          payload: []
-        })
-      }
-    )
+  // GetItems()
+  //   .then(res =>
+  //     dispatch({
+  //       type: FIND_ITEMS,
+  //       data: res.data,
+  //       text: text
+  //     })
+  //   )
+  //   .catch(err => {
+  //     console.log(err.toString())
+  //     dispatch({
+  //       type: GET_ITEMS,
+  //       payload: []
+  //     })
+  //   }
+  //   )
 }

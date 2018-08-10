@@ -28,7 +28,7 @@ const getDate = value => {
   return date;
 };
 
-const OneItem = ({ item, events, editEvent}) => {
+const OneItem = ({ delEvent, item, events, editEvent}) => {
 
   const isDate = (eventDate, item) => {
     if ((new Date(eventDate).getFullYear() === new Date(item).getFullYear())
@@ -56,6 +56,7 @@ const OneItem = ({ item, events, editEvent}) => {
                   key={event.id}
                   event={event}
                   editEvent={editEvent}
+                  delEvent={delEvent}
                 />
               )
           }
@@ -79,6 +80,7 @@ const OneItem = ({ item, events, editEvent}) => {
                 key={event.id}
                 event={event}
                 editEvent={editEvent}
+                delEvent={delEvent}
               />
             )
         }

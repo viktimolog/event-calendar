@@ -13,122 +13,104 @@ const styleHead = {
   fontSize: '16px'
 }
 
-const getDate = value => {
-  const dateFormat = require('dateformat');
-  // const date = dateFormat(value, 'ddd mmm d yyyy');
-  const date = dateFormat(value, 'd');
-  return date;
-};
-
-const Items = ({ editEvent, events, items, setCurItem }) => {
-
-  console.log('events = ', events)//ok
-
-  console.log('events date[0] = ', new Date(events[0].date).getDate())
-
-  console.log('events getDate(item) = ', getDate(items[0]))
-
-  // alert(new Date(events[0].date).getDate() === getDate(items[0]))//false
-
-  //ok равны
-
-
-
-  // events={events.filter(event => new Date(event.date).getDate() === getDate(item))}
-
-  return (
-    <div style={{ display: 'flex', width: '100%' }}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell component="th" scope="row"
-              style={styleHead}>Пн</TableCell>
-            <TableCell component="th" scope="row"
-              style={styleHead}>Вт</TableCell>
-            <TableCell component="th" scope="row"
-              style={styleHead}>Ср</TableCell>
-            <TableCell component="th" scope="row"
-              style={styleHead}>Чт</TableCell>
-            <TableCell component="th" scope="row"
-              style={styleHead}>Пт</TableCell>
-            <TableCell component="th" scope="row"
-              style={styleHead}>Сб</TableCell>
-            <TableCell component="th" scope="row"
-              style={styleHead}>Вс</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            {items.slice(0, 7).map(item =>
-              <TableCell component="th" scope="row">
-                <OneItem
-                  events={events}
-                  item={item}
-                  editEvent={editEvent}
-                />
-              </TableCell>
-            )}
-          </TableRow>
-          <TableRow>
-            {items.slice(7, 14).map(item =>
-              <TableCell component="th" scope="row">
-                <OneItem
-                  events={events}
-                  item={item}
-                  editEvent={editEvent}
-                />
-              </TableCell>
-            )}
-          </TableRow>
-          <TableRow>
-            {items.slice(14, 21).map(item =>
-              <TableCell component="th" scope="row">
-                <OneItem
-                  events={events}
-                  item={item}
-                  editEvent={editEvent}
-                />
-              </TableCell>
-            )}
-          </TableRow>
-          <TableRow>
-            {items.slice(21, 28).map(item =>
-              <TableCell component="th" scope="row">
-                <OneItem
-                  events={events}
-                  item={item}
-                  editEvent={editEvent}
-                />
-              </TableCell>
-            )}
-          </TableRow>
-          <TableRow>
-            {items.slice(28, 35).map(item =>
-              <TableCell component="th" scope="row">
-                <OneItem
-                  events={events}
-                  item={item}
-                  editEvent={editEvent}
-                />
-              </TableCell>
-            )}
-          </TableRow>
-          <TableRow>
-            {items.slice(35, 42).map(item =>
-              <TableCell component="th" scope="row">
-                <OneItem
-                  events={events}
-                  item={item}
-                  editEvent={editEvent}
-                />
-              </TableCell>
-            )}
-          </TableRow>
-        </TableBody>
-      </Table>
-    </div>
-  )
-}
+const Items = ({ delEvent, editEvent, events, items, setCurItem }) => (
+  <div style={{ display: 'flex', width: '100%' }}>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell component="th" scope="row"
+            style={styleHead}>Пн</TableCell>
+          <TableCell component="th" scope="row"
+            style={styleHead}>Вт</TableCell>
+          <TableCell component="th" scope="row"
+            style={styleHead}>Ср</TableCell>
+          <TableCell component="th" scope="row"
+            style={styleHead}>Чт</TableCell>
+          <TableCell component="th" scope="row"
+            style={styleHead}>Пт</TableCell>
+          <TableCell component="th" scope="row"
+            style={styleHead}>Сб</TableCell>
+          <TableCell component="th" scope="row"
+            style={styleHead}>Вс</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          {items.slice(0, 7).map(item =>
+            <TableCell component="th" scope="row">
+              <OneItem
+                events={events}
+                item={item}
+                editEvent={editEvent}
+                delEvent={delEvent}
+              />
+            </TableCell>
+          )}
+        </TableRow>
+        <TableRow>
+          {items.slice(7, 14).map(item =>
+            <TableCell component="th" scope="row">
+              <OneItem
+                events={events}
+                item={item}
+                editEvent={editEvent}
+                delEvent={delEvent}
+              />
+            </TableCell>
+          )}
+        </TableRow>
+        <TableRow>
+          {items.slice(14, 21).map(item =>
+            <TableCell component="th" scope="row">
+              <OneItem
+                events={events}
+                item={item}
+                editEvent={editEvent}
+                delEvent={delEvent}
+              />
+            </TableCell>
+          )}
+        </TableRow>
+        <TableRow>
+          {items.slice(21, 28).map(item =>
+            <TableCell component="th" scope="row">
+              <OneItem
+                events={events}
+                item={item}
+                editEvent={editEvent}
+                delEvent={delEvent}
+              />
+            </TableCell>
+          )}
+        </TableRow>
+        <TableRow>
+          {items.slice(28, 35).map(item =>
+            <TableCell component="th" scope="row">
+              <OneItem
+                events={events}
+                item={item}
+                editEvent={editEvent}
+                delEvent={delEvent}
+              />
+            </TableCell>
+          )}
+        </TableRow>
+        <TableRow>
+          {items.slice(35, 42).map(item =>
+            <TableCell component="th" scope="row">
+              <OneItem
+                events={events}
+                item={item}
+                editEvent={editEvent}
+                delEvent={delEvent}
+              />
+            </TableCell>
+          )}
+        </TableRow>
+      </TableBody>
+    </Table>
+  </div>
+)
 
 export default Items
 
@@ -136,5 +118,6 @@ Items.propTypes = {
   items: PropTypes.array.isRequired,
   events: PropTypes.array.isRequired,
   setCurItem: PropTypes.func.isRequired,
-  editEvent: PropTypes.func.isRequired
+  editEvent: PropTypes.func.isRequired,
+  delEvent: PropTypes.func.isRequired
 }

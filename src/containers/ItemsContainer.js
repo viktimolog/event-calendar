@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Items from 'components/Items'
 import Header from 'components/Header'
 
-import { getItems, setCurItem, findItems, addEvent, editEvent } from 'actions/actionCreator'
+import { getEvents, findItems, addEvent, editEvent, delEvent } from 'actions/actionCreator';
 
 const dayTime = 86400000;
 
@@ -19,7 +19,7 @@ class ItemsContainer extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.getItems(this.getCurMonth())
+    this.props.getEvents()
     this.getCurMonth(new Date())
   }
 
@@ -63,7 +63,6 @@ class ItemsContainer extends React.Component {
   }
 
   render() {
-    // console.log(this.props.events)//ok
     return (
       <div>
         <Header
@@ -74,14 +73,11 @@ class ItemsContainer extends React.Component {
           addEvent={this.props.addEvent}
           handleUpdate={this.handleUpdate}
         />
-        {/* <Search findItems={this.props.findItems} /> */}
         <Items
-          // items={this.props.items}
           items={this.state.month}
           events={this.props.events}
           editEvent={this.props.editEvent}
-
-          
+          delEvent={this.props.delEvent}
         />
       </div>)
   }
@@ -90,11 +86,11 @@ class ItemsContainer extends React.Component {
 ItemsContainer.propTypes = {
   items: PropTypes.array.isRequired,
   events: PropTypes.array.isRequired,
-  setCurItem: PropTypes.func.isRequired,
-  getItems: PropTypes.func.isRequired,
+  getEvents: PropTypes.func.isRequired,
   findItems: PropTypes.func.isRequired,
   addEvent: PropTypes.func.isRequired,
-  editEvent: PropTypes.func.isRequired
+  editEvent: PropTypes.func.isRequired,
+  delEvent: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -102,11 +98,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  setCurItem,
-  getItems,
+  getEvents,
   findItems,
-  addEvent  ,
-  editEvent
+  addEvent,
+  editEvent,
+  delEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemsContainer)
