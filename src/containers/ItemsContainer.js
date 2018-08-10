@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Items from 'components/Items'
 import Header from 'components/Header'
 
-import { getItems, setCurItem, findItems, addEvent } from 'actions/actionCreator'
+import { getItems, setCurItem, findItems, addEvent, editEvent } from 'actions/actionCreator'
 
 const dayTime = 86400000;
 
@@ -15,12 +15,15 @@ class ItemsContainer extends React.Component {
     firstDayMonth: null,
     lastDayMonth: null,
     countMonth: null,
-    year: null,
-    events: []
+    year: null
   }
 
   componentDidMount() {
     // this.props.getItems(this.getCurMonth())
+    this.getCurMonth(new Date())
+  }
+
+  handleUpdate = () => {
     this.getCurMonth(new Date())
   }
 
@@ -35,15 +38,8 @@ class ItemsContainer extends React.Component {
   getCurMonth = date => {
     let month = []
 
-    // alert('date.getMonth()='+date.getMonth())//ok
-
-    // let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
     const firstDayMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const lastDayMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
-    // alert('lastDayMonth = '+lastDayMonth)//ok
-
-    // alert(firstDay.getDay())//3 ok
 
     let firstDayScreen;
 
@@ -51,27 +47,19 @@ class ItemsContainer extends React.Component {
 
     else firstDayScreen = firstDayMonth.getTime() - (firstDayMonth.getDay() - 1) * dayTime
 
-    // alert('firstDayScreen = ' + new Date(firstDayScreen))
 
     const lastDayScreen = firstDayScreen + 42 * dayTime;
 
-    // alert(new Date(one))//OK 30/07
-
     for (let i = firstDayScreen; i < lastDayScreen; i += dayTime)
-      month.push(i)
-    // month.push(new Date(i))//00-00-00
-    // console.log('month=', month)//ok
+      month.push(i);
+
     this.setState({
       month,
       firstDayMonth,
       lastDayMonth,
       countMonth: date.getMonth(),
-      year: date.getFullYear(),
-      events: this.props.events
-        .filter(event => event.date >= firstDayScreen)
-        .filter(event => event.date < lastDayScreen + dayTime)
+      year: date.getFullYear()
     })
-    // return month;
   }
 
   render() {
@@ -84,13 +72,14 @@ class ItemsContainer extends React.Component {
           handleRight={this.handleRight}
           handleLeft={this.handleLeft}
           addEvent={this.props.addEvent}
+          handleUpdate={this.handleUpdate}
         />
         {/* <Search findItems={this.props.findItems} /> */}
         <Items
           // items={this.props.items}
           items={this.state.month}
-          // events={this.state.events}
           events={this.props.events}
+          editEvent={this.props.editEvent}
 
           
         />
@@ -100,10 +89,12 @@ class ItemsContainer extends React.Component {
 
 ItemsContainer.propTypes = {
   items: PropTypes.array.isRequired,
+  events: PropTypes.array.isRequired,
   setCurItem: PropTypes.func.isRequired,
   getItems: PropTypes.func.isRequired,
   findItems: PropTypes.func.isRequired,
-  addEvent: PropTypes.func.isRequired
+  addEvent: PropTypes.func.isRequired,
+  editEvent: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -114,7 +105,8 @@ const mapDispatchToProps = {
   setCurItem,
   getItems,
   findItems,
-  addEvent
+  addEvent  ,
+  editEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemsContainer)

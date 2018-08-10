@@ -30,12 +30,12 @@ const styles = theme => ({
     },
 });
 
-class ModalDialogDatePicker extends React.Component {
+class ModalDialogEditEvent extends React.Component {
 
     state = {
         open: false,
-        date: Date.now(),
-        newNameEvent: ''
+        date: new Date(this.props.event.date),//nah
+        newNameEvent: this.props.event.text
     };
 
     handleNewEvent = e => this.setState({ newNameEvent: e.target.value });
@@ -54,12 +54,12 @@ class ModalDialogDatePicker extends React.Component {
             return;
         }
 
-        const newEvent = {
-            id: Date.now(),
+        const editEvent = {
+            id: this.props.event.id,
             date: this.state.date,
             text: this.state.newNameEvent
         }
-        this.props.addEvent(newEvent);
+        this.props.editEvent(editEvent);
         this.handleClose();
     };
 
@@ -68,15 +68,15 @@ class ModalDialogDatePicker extends React.Component {
     };
 
     handleClose = () => {
-        this.setState({ open: false, newNameEvent: '' });
+        this.setState({ open: false, newNameEvent: this.props.event.text});
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, event } = this.props;
         return (
             <div>
                 <Button variant="contained" color="primary" className={classes.button} onClick={this.handleOpen}>
-                    {TextConstants.ADD}
+                    {event.text}
                 </Button>
                 <Modal
                     aria-labelledby="simple-modal-title"
@@ -86,7 +86,7 @@ class ModalDialogDatePicker extends React.Component {
                 >
                     <div style={getModalStyle()} className={classes.paper}>
                         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px', fontSize: '16px', color: 'blue' }}>
-                            {TextConstants.WINDOWADDNEWEVENT}
+                            {TextConstants.WINDOWEDITEVENT}
                         </div>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={12}>
@@ -96,7 +96,8 @@ class ModalDialogDatePicker extends React.Component {
                                             <DatePicker
                                                 label={TextConstants.CHOICEDATE}
                                                 handleDate={this.handleDate}
-                                                date={Date.now()}
+                                                // date={this.state.date}
+                                                date={event.date}
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={12} md={4}>
@@ -118,7 +119,7 @@ class ModalDialogDatePicker extends React.Component {
                                                 style={{ display: 'flex', width: '90%', justifyContent: 'center', marginTop: '10px' }}
                                                 color="primary"
                                                 onClick={this.handleOK}>
-                                                {TextConstants.ADD}
+                                                {TextConstants.EDIT}
                                             </Button>
                                         </Grid>
                                         <Grid item xs={12} sm={12} md={2}>
@@ -141,9 +142,11 @@ class ModalDialogDatePicker extends React.Component {
     }
 }
 
-ModalDialogDatePicker.propTypes = {
+ModalDialogEditEvent.propTypes = {
     classes: PropTypes.object.isRequired,
-    addEvent: PropTypes.func.isRequired
+    addEvent: PropTypes.func.isRequired,
+    editEvent: PropTypes.func.isRequired,
+    event: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ModalDialogDatePicker);
+export default withStyles(styles)(ModalDialogEditEvent);

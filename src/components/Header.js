@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import { Item } from 'semantic-ui-react'
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
@@ -22,15 +21,18 @@ const styles = theme => ({
     }
 });
 
-// function Header(props) {
 class Header extends React.Component {
 
     onClickRight = () => {
-        this.props.handleRight()
+        this.props.handleRight();
     }
 
     onClickLeft = () => {
-        this.props.handleLeft()
+        this.props.handleLeft();
+    }
+
+    onClickUpdate = () => {
+        this.props.handleUpdate();
     }
 
     render() {
@@ -55,8 +57,8 @@ class Header extends React.Component {
                     </Button>
                 </div>
                 <div style={{ display: 'flex', width: '60%', justifyContent: 'flex-end', alignItems: 'center', marginRight: '20px' }}>
-                    <ModalDialogDatePicker addEvent={this.props.addEvent}/>
-                    <Button variant="contained" color="primary" className={classes.button} onClick={() => { alert('onClick Update') }}>
+                    <ModalDialogDatePicker addEvent={this.props.addEvent} />
+                    <Button variant="contained" color="primary" className={classes.button} onClick={this.onClickUpdate}>
                         {TextConstants.UPDATE}
                     </Button>
                     <Search />
@@ -67,10 +69,14 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
+    classes: PropTypes.object.isRequired,
     findItems: PropTypes.func.isRequired,
-    addEvent: PropTypes.func.isRequired
+    addEvent: PropTypes.func.isRequired,
+    handleUpdate: PropTypes.func.isRequired,
+    handleRight: PropTypes.func.isRequired,
+    handleLeft: PropTypes.func.isRequired,
+    countMonth: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired
 }
-
-// export default Header
 
 export default withStyles(styles)(Header);

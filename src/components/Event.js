@@ -1,34 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
+import ModalDialogEditEvent from 'components/ModalDialogEditEvent';
 
-const getDate = value => {
-    const dateFormat = require('dateformat');
-    const date = dateFormat(value, 'HH:mm');
-    return date;
-};
-
-const Event = ({ event }) => {
+const Event = ({ event, editEvent }) => {
     return (
-        <div>
-        <Button
-            style={{ margin: 5 }}
-            size="small"
-            color="primary"
-            variant="contained"
-            onClick={() => alert('ModalWindow for edit')}
-        >
-            {/* {getDate(event.date) + ' ' + event.text} */}
-            {event.text}
-        </Button>
-        </div>
+        <ModalDialogEditEvent
+            event={event}
+            editEvent={editEvent}
+        />
     )
 }
 
 Event.propTypes = {
-    event: PropTypes.object.isRequired
+    event: PropTypes.object.isRequired,
+    editEvent: PropTypes.func.isRequired
 }
 
 export default Event;

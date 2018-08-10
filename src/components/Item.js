@@ -22,21 +22,13 @@ const styleNotToday = {
   height: '30px'
 }
 
-const style1 = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '20%',
-  // height: '30px'
-}
-
 const getDate = value => {
   const dateFormat = require('dateformat');
   const date = dateFormat(value, 'd');
   return date;
 };
 
-const OneItem = ({ item, events }) => {
+const OneItem = ({ item, events, editEvent}) => {
 
   const isDate = (eventDate, item) => {
     if ((new Date(eventDate).getFullYear() === new Date(item).getFullYear())
@@ -63,6 +55,7 @@ const OneItem = ({ item, events }) => {
                 <Event
                   key={event.id}
                   event={event}
+                  editEvent={editEvent}
                 />
               )
           }
@@ -85,6 +78,7 @@ const OneItem = ({ item, events }) => {
               <Event
                 key={event.id}
                 event={event}
+                editEvent={editEvent}
               />
             )
         }
@@ -95,7 +89,8 @@ const OneItem = ({ item, events }) => {
 
 OneItem.propTypes = {
   item: PropTypes.object.isRequired,
-  events: PropTypes.array.isRequired
+  events: PropTypes.array.isRequired,
+  editEvent: PropTypes.func.isRequired
 }
 
 export default OneItem;

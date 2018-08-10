@@ -20,7 +20,7 @@ const getDate = value => {
   return date;
 };
 
-const Items = ({ events, items, setCurItem }) => {
+const Items = ({ editEvent, events, items, setCurItem }) => {
 
   console.log('events = ', events)//ok
 
@@ -64,6 +64,7 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
+                  editEvent={editEvent}
                 />
               </TableCell>
             )}
@@ -74,6 +75,7 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
+                  editEvent={editEvent}
                 />
               </TableCell>
             )}
@@ -84,6 +86,7 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
+                  editEvent={editEvent}
                 />
               </TableCell>
             )}
@@ -94,6 +97,7 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
+                  editEvent={editEvent}
                 />
               </TableCell>
             )}
@@ -104,6 +108,7 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
+                  editEvent={editEvent}
                 />
               </TableCell>
             )}
@@ -114,6 +119,7 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
+                  editEvent={editEvent}
                 />
               </TableCell>
             )}
@@ -129,5 +135,6 @@ export default Items
 Items.propTypes = {
   items: PropTypes.array.isRequired,
   events: PropTypes.array.isRequired,
-  setCurItem: PropTypes.func.isRequired
+  setCurItem: PropTypes.func.isRequired,
+  editEvent: PropTypes.func.isRequired
 }

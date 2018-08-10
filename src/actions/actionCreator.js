@@ -2,12 +2,20 @@ import {
   GET_ITEMS,
   SET_CURITEM,
   FIND_ITEMS,
-  ADD_EVENT
+  ADD_EVENT,
+  EDIT_EVENT
 } from './actionTypes'
 
 import {
   GetItems
 } from './axiosRequests'
+
+export const editEvent = event => dispatch => {
+  dispatch({
+    type: EDIT_EVENT,
+    event
+  })
+}
 
 export const addEvent = event => dispatch => {
   dispatch({
@@ -19,7 +27,7 @@ export const addEvent = event => dispatch => {
 export const getItems = month => dispatch => {
   dispatch({
     type: GET_ITEMS,
-    payload: month
+    month
   })
   // GetItems()
   //   .then(res => {

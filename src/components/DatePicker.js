@@ -24,7 +24,8 @@ class DatePicker extends React.Component {
     };
 
     state = {
-        date: this.getDate(Date.now())
+        // date: this.getDate(Date.now())
+        date: this.getDate(this.props.date)
     };
 
     handleDate = event => {

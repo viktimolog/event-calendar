@@ -2,7 +2,8 @@ import {
   FIND_ITEMS,
   GET_ITEMS,
   SET_CURITEM,
-  ADD_EVENT
+  ADD_EVENT,
+  EDIT_EVENT
 } from 'actions/actionTypes'
 
 //30/07 and 31/07
@@ -11,7 +12,7 @@ import {
 const initialState = {
   items: [],
   curItem: false,
-  events:[
+  events: [
     {
       id: 0,
       date: 1532898000000,
@@ -32,8 +33,14 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
+    case EDIT_EVENT: {
+      return {
+        ...state,
+        events: [...state.events.filter(event => event.id !== action.event.id), action.event]
+      }
+    }
+
     case ADD_EVENT: {
-      console.log('event = ',action.event)
       return {
         ...state,
         events: [...state.events, action.event]
@@ -43,7 +50,7 @@ const mainReducer = (state = initialState, action) => {
     case GET_ITEMS: {
       return {
         ...state,
-        items: action.payload
+        items: action.month
       }
     }
 
