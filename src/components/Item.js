@@ -32,7 +32,6 @@ const style1 = {
 
 const getDate = value => {
   const dateFormat = require('dateformat');
-  // const date = dateFormat(value, 'ddd mmm d yyyy');
   const date = dateFormat(value, 'd');
   return date;
 };
@@ -47,18 +46,27 @@ const OneItem = ({ item, events }) => {
     return false;
   }
 
-  // if ((new Date().getFullYear() === new Date(item).getFullYear())
-  //   && (new Date().getMonth() === new Date(item).getMonth())
-  //   && (new Date().getDate() === new Date(item).getDate()))
-
   if (isDate(Date.now(), item))
     return (
-      <div style={styleToday}>
-        {
-          new Date(item).getDate() === 1
-            ? getDate(item) + TextConstants.SMALLMONTHS[new Date(item).getMonth()]
-            : getDate(item)
-        }
+      <div>
+        <div style={styleToday}>
+          {
+            new Date(item).getDate() === 1
+              ? getDate(item) + TextConstants.SMALLMONTHS[new Date(item).getMonth()]
+              : getDate(item)
+          }
+        </div>
+        <div>
+          {
+            events.filter(event => isDate(event.date, item))
+              .map(event =>
+                <Event
+                  key={event.id}
+                  event={event}
+                />
+              )
+          }
+        </div>
       </div>
     )
   return (
@@ -70,15 +78,17 @@ const OneItem = ({ item, events }) => {
             : getDate(item)
         }
       </div>
-      {/* <div style={style1}> */}
       <div>
-      {
-        events.filter(event => isDate(event.date, item))
-          .map(event =>
-            <Event event={event} />
-          )
-      }
-    </div>
+        {
+          events.filter(event => isDate(event.date, item))
+            .map(event =>
+              <Event
+                key={event.id}
+                event={event}
+              />
+            )
+        }
+      </div>
     </div>
   )
 }

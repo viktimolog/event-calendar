@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Items from 'components/Items'
 import Header from 'components/Header'
 
-import { getItems, setCurItem, findItems } from 'actions/actionCreator'
+import { getItems, setCurItem, findItems, addEvent } from 'actions/actionCreator'
 
 const dayTime = 86400000;
 
@@ -83,6 +83,7 @@ class ItemsContainer extends React.Component {
           year={this.state.year}
           handleRight={this.handleRight}
           handleLeft={this.handleLeft}
+          addEvent={this.props.addEvent}
         />
         {/* <Search findItems={this.props.findItems} /> */}
         <Items
@@ -91,7 +92,7 @@ class ItemsContainer extends React.Component {
           // events={this.state.events}
           events={this.props.events}
 
-        // setCurItem={this.props.setCurItem}
+          
         />
       </div>)
   }
@@ -101,31 +102,19 @@ ItemsContainer.propTypes = {
   items: PropTypes.array.isRequired,
   setCurItem: PropTypes.func.isRequired,
   getItems: PropTypes.func.isRequired,
-  findItems: PropTypes.func.isRequired
+  findItems: PropTypes.func.isRequired,
+  addEvent: PropTypes.func.isRequired
 }
 
-// const getEventsFromState = state => state.mainReducer.events;
-
-// const getCurEvents = createSelector(
-//   getEventsFromState,
-//   (events) => {    
-//     return events
-//       .filter(event => event.date > this.state.firstDayScreen)
-//       .filter(event => event.date < this.state.lastDayScreen - 1)
-//   }
-// )
-
-
-//здесь будет выборка после reselect, он получит сразу только те ивенты, что попадают в период - не будет
 const mapStateToProps = state => ({
   events: state.mainReducer.events,
-  // events: getCurEvents(state)
 })
 
 const mapDispatchToProps = {
   setCurItem,
   getItems,
-  findItems
+  findItems,
+  addEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemsContainer)

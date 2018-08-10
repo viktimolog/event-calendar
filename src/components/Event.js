@@ -20,7 +20,8 @@ const Event = ({ event }) => {
             variant="contained"
             onClick={() => alert('ModalWindow for edit')}
         >
-            {getDate(event.date) + ' ' + event.text}
+            {/* {getDate(event.date) + ' ' + event.text} */}
+            {event.text}
         </Button>
         </div>
     )

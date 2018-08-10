@@ -1,7 +1,8 @@
 import {
   FIND_ITEMS,
   GET_ITEMS,
-  SET_CURITEM
+  SET_CURITEM,
+  ADD_EVENT
 } from 'actions/actionTypes'
 
 //30/07 and 31/07
@@ -12,17 +13,17 @@ const initialState = {
   curItem: false,
   events:[
     {
-      id: Date.now(),
+      id: 0,
       date: 1532898000000,
       text: 'event 1 30/07/18'
     },
     {
-      id: Date.now(),
+      id: 1,
       date: 1532898001000,
       text: 'event 2 30/07/18'
     },
     {
-      id: Date.now()+1,
+      id: 2,
       date: 1533070800000,
       text: 'event 01/08/18'
     },
@@ -31,6 +32,14 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_EVENT: {
+      console.log('event = ',action.event)
+      return {
+        ...state,
+        events: [...state.events, action.event]
+      }
+    }
+
     case GET_ITEMS: {
       return {
         ...state,

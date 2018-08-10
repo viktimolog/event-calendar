@@ -64,7 +64,6 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
-                  setCurItem={() => setCurItem(item)}
                 />
               </TableCell>
             )}
@@ -75,7 +74,6 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
-                  setCurItem={() => setCurItem(item)}
                 />
               </TableCell>
             )}
@@ -86,7 +84,6 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
-                  setCurItem={() => setCurItem(item)}
                 />
               </TableCell>
             )}
@@ -97,7 +94,6 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
-                  setCurItem={() => setCurItem(item)}
                 />
               </TableCell>
             )}
@@ -108,7 +104,6 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
-                  setCurItem={() => setCurItem(item)}
                 />
               </TableCell>
             )}
@@ -119,7 +114,6 @@ const Items = ({ events, items, setCurItem }) => {
                 <OneItem
                   events={events}
                   item={item}
-                  setCurItem={() => setCurItem(item)}
                 />
               </TableCell>
             )}

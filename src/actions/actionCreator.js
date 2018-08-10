@@ -1,11 +1,20 @@
 import {
   GET_ITEMS,
   SET_CURITEM,
-  FIND_ITEMS
+  FIND_ITEMS,
+  ADD_EVENT
 } from './actionTypes'
+
 import {
   GetItems
 } from './axiosRequests'
+
+export const addEvent = event => dispatch => {
+  dispatch({
+    type: ADD_EVENT,
+    event
+  })
+}
 
 export const getItems = month => dispatch => {
   dispatch({

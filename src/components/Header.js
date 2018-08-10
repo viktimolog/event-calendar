@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import { TextConstants } from 'constants/TextConstants';
 import Search from 'components/Search';
+import ModalDialogDatePicker from 'components/ModalDialogDatePicker'
 
 const styles = theme => ({
     button: {
@@ -37,16 +38,13 @@ class Header extends React.Component {
         return (
             <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-start', alignItems: 'center' }}>
                 <div style={{ display: 'flex', width: '40%', justifyContent: 'flex-start', alignItems: 'center' }}>
-                    <Button color="primary" style={{ fontSize: '16px' }}
-                    >
+                    <Button color="primary" style={{ fontSize: '16px' }}>
                         {TextConstants.TODAY}
                     </Button>
-                    <IconButton color="primary" onClick={this.onClickLeft}
-                    >
+                    <IconButton color="primary" onClick={this.onClickLeft}>
                         <ChevronLeft />
                     </IconButton>
-                    <IconButton color="primary" onClick={this.onClickRight}
-                    >
+                    <IconButton color="primary" onClick={this.onClickRight}>
                         <ChevronRight />
                     </IconButton>
                     <Button color="primary" style={{ fontSize: '16px' }}>
@@ -57,9 +55,7 @@ class Header extends React.Component {
                     </Button>
                 </div>
                 <div style={{ display: 'flex', width: '60%', justifyContent: 'flex-end', alignItems: 'center', marginRight: '20px' }}>
-                    <Button variant="contained" color="primary" className={classes.button} onClick={() => { alert('onClick Add') }}>
-                        {TextConstants.ADD}
-                    </Button>
+                    <ModalDialogDatePicker addEvent={this.props.addEvent}/>
                     <Button variant="contained" color="primary" className={classes.button} onClick={() => { alert('onClick Update') }}>
                         {TextConstants.UPDATE}
                     </Button>
@@ -71,7 +67,8 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-    findItems: PropTypes.func.isRequired
+    findItems: PropTypes.func.isRequired,
+    addEvent: PropTypes.func.isRequired
 }
 
 // export default Header
