@@ -1,21 +1,37 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableHead from '@material-ui/core/TableHead'
-import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableHead from '@material-ui/core/TableHead';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
-import OneItem from './Item'
+import OneItem from './Item';
 
 const styleHead = {
   color: 'blue',
   fontSize: '16px'
 }
 
-const Items = ({ delEvent, editEvent, events, items, setCurItem }) => (
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    maxWidth: 2000,
+  },
+  cell: {
+    maxWidth: 20,
+    // maxHeight: 20
+  }
+});
+
+const Items = ({ classes, delEvent, editEvent, events, items }) => (
   <div style={{ display: 'flex', width: '100%' }}>
-    <Table>
+    <Table className={classes.table}>
       <TableHead>
         <TableRow>
           <TableCell component="th" scope="row"
@@ -37,7 +53,7 @@ const Items = ({ delEvent, editEvent, events, items, setCurItem }) => (
       <TableBody>
         <TableRow>
           {items.slice(0, 7).map(item =>
-            <TableCell component="th" scope="row">
+            <TableCell component="th" scope="row" className={classes.cell}>
               <OneItem
                 events={events}
                 item={item}
@@ -112,12 +128,13 @@ const Items = ({ delEvent, editEvent, events, items, setCurItem }) => (
   </div>
 )
 
-export default Items
+// export default Items
+export default withStyles(styles)(Items);
 
 Items.propTypes = {
   items: PropTypes.array.isRequired,
   events: PropTypes.array.isRequired,
-  setCurItem: PropTypes.func.isRequired,
   editEvent: PropTypes.func.isRequired,
-  delEvent: PropTypes.func.isRequired
+  delEvent: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
 }

@@ -80,7 +80,8 @@ class ModalDialogEditEvent extends React.Component {
         const { classes, event } = this.props;
         return (
             <div>
-                <Button variant="contained" color="primary" className={classes.button} onClick={this.handleOpen}>
+                <Button style={{marginTop: '5px', marginBottom: '5px'}}
+                variant="contained" color="primary" className={classes.button} onClick={this.handleOpen}>
                     {event.text}
                 </Button>
                 <Modal
