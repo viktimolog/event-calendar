@@ -7,10 +7,10 @@ const styleToday = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  width: '30px',
-  height: '30px',
+  width: '35px',
+  height: '35px',
   background: 'blue',
-  borderRadius: '20px',
+  borderRadius: '35px',
   color: 'white'
 }
 
@@ -18,8 +18,8 @@ const styleNotToday = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  width: '30px',
-  height: '30px'
+  width: '35px',
+  height: '35px'
 }
 
 const getDate = value => {
