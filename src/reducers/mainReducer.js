@@ -11,31 +11,14 @@ import {
 
 const initialState = {
   items: [],
-  curItem: false,
-  events:[]
-  // events: [
-  //   {
-  //     id: 0,
-  //     date: 1532898000000,
-  //     text: 'event 1 30/07/18'
-  //   },
-  //   {
-  //     id: 1,
-  //     date: 1532898001000,
-  //     text: 'event 2 30/07/18'
-  //   },
-  //   {
-  //     id: 2,
-  //     date: 1533070800000,
-  //     text: 'event 01/08/18'
-  //   },
-  // ]
+  events: []
 }
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
     case EDIT_EVENT: {
-      localStorage.setItem('events', JSON.stringify([...state.events.filter(event => event.id !== action.event.id), action.event]))
+      localStorage.setItem('events', JSON.stringify([...state.events
+        .filter(event => event.id !== action.event.id), action.event]))
       return {
         ...state,
         events: [...state.events.filter(event => event.id !== action.event.id), action.event]
@@ -62,7 +45,6 @@ const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         events: action.events
-        // events: JSON.parse(localStorage.getItem('events'))
       }
     }
 
@@ -70,28 +52,42 @@ const mainReducer = (state = initialState, action) => {
       if (action.text === '')
         return {
           ...state,
-          items: action.data
+          events: JSON.parse(localStorage.getItem('events'))
         }
+      let res = [];
+      JSON.parse(localStorage.getItem('events')).forEach(obj => {
+        Object.keys(obj).forEach(key => {
+          if (key === 'id') return;
 
-      let arr = []
-      action.data.forEach(obj => {
-        for (let k in obj) {
-          const curObj = obj[k]
-          if (k === 'general') {
-            if (Object.values(curObj).slice(0, -1).join(' ').toLowerCase().includes(action.text.toLowerCase())) {
-              arr.push(obj)
-              break
+          if (key === 'date') {
+            let day, month;
+            new Date(obj[key]).getDate() < 10
+              ? day = '0' + (new Date(obj[key]).getDate() + '')
+              : day = new Date(obj[key]).getDate() + ''
+
+            new Date(obj[key]).getMonth() + 1 < 10
+              ? month = '0' + (new Date(obj[key]).getMonth() + 1 + '')
+              : month = new Date(obj[key]).getMonth() + 1 + ''
+
+            const date = day + '/' + month + '/' + (new Date(obj[key]).getFullYear() + '')
+
+            if (date.includes(action.text)) {
+              res = res.filter(item => item.id !== obj.id)
+              res.push(obj)
             }
-          } else if (Object.values(curObj).join(' ').toLowerCase().includes(action.text.toLowerCase())) {
-            arr.push(obj)
-            break
           }
-        }
+          if (key === 'text') {
+            if (obj[key].toLowerCase().includes(action.text.toLowerCase())) {
+              res = res.filter(item => item.id !== obj.id)
+              res.push(obj)
+            }
+          }
+        })
       })
 
       return {
         ...state,
-        items: arr
+        events: res
       }
     }
 

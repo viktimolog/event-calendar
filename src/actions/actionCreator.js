@@ -14,14 +14,14 @@ export const editEvent = event => dispatch => {
 }
 
 
-export const addEvent = event => dispatch => {  
+export const addEvent = event => dispatch => {
   dispatch({
     type: ADD_EVENT,
     event
   })
 }
 
-export const delEvent = id => dispatch => {  
+export const delEvent = id => dispatch => {
   dispatch({
     type: DEL_EVENT,
     id
@@ -40,6 +40,10 @@ export const getEvents = () => dispatch => {
 }
 
 export const findItems = text => dispatch => {
+  dispatch({
+    type: FIND_ITEMS,
+    text
+  })
   // GetItems()
   //   .then(res =>
   //     dispatch({

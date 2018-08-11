@@ -6,13 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { TextConstants } from 'constants/TextConstants';
 
 const styles = theme => ({
-  // container: {
-  //   display: 'flex',
-  //   flexWrap: 'wrap',
-  // },
-  // margin: {
-  //   margin: theme.spacing.unit,
-  // },
   bootstrapRoot: {
     padding: 0,
     'label + &': {
@@ -46,9 +39,6 @@ const styles = theme => ({
   },
   bootstrapFormLabel: {
     fontSize: 18,
-  },
-  margin: {
-    margin: theme.spacing.unit,
   }
 });
 
@@ -59,24 +49,25 @@ class Search extends React.Component {
     this.setState({
       text: event.target.value.trim()
     })
-    // this.props.findItems(event.target.value.trim())
+    this.props.findItems(event.target.value.trim())
   }
 
   render() {
     const { classes } = this.props;
     return (
-      <div style={{display: 'flex', justifyItems: 'center'}}>
-        <IconSearch />
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <IconSearch style={{ marginLeft: 50, fontSize: 36 }} />
         <TextField
+          style={{ width: 270, marginLeft: 5 }}
           placeholder={TextConstants.PLACEHOLDERSEARCH}
           InputProps={{
             disableUnderline: true,
             classes: {
               root: classes.bootstrapRoot,
-              input: classes.bootstrapInput,
-              value: this.state.text,
-              onChange: this.handleTextChange
+              input: classes.bootstrapInput
             },
+            value: this.state.text,
+            onChange: this.handleTextChange
           }}
           InputLabelProps={{
             shrink: true,
@@ -84,53 +75,9 @@ class Search extends React.Component {
           }}
         />
       </div>
-      //      <div className={classes.margin}>
-      //      <Grid container spacing={8} alignItems="flex-end">
-      //        <Grid item>
-      //          <IconSearch />
-      //        </Grid>
-      //        <Grid item>
-      //          <TextField id="input-with-icon-grid" label="With a grid" />
-      //        </Grid>
-      //      </Grid>
-      //    </div>
-      //  </div>
     )
   }
 }
 
 export default withStyles(styles)(Search);
-
-
-
-
-
-
-// import React from 'react'
-// import { Input } from 'semantic-ui-react'
-// import { TextConstants } from 'constants/TextConstants';
-
-// export default class Search extends React.Component {
-//   state = {text: ''}
-
-//   handleTextChange = event => {
-//     this.setState({
-//       text: event.target.value.trim()
-//     })
-//     // this.props.findItems(event.target.value.trim())
-//   }
-
-//   render () {
-//     return (
-//       <Input
-//         style={{marginLeft: '40px'}}
-//         icon='search'
-//         value={this.state.text}
-//         placeholder={TextConstants.PLACEHOLDERSEARCH}
-//         onChange={this.handleTextChange}
-//       />
-//     )      
-//   }
-// }
-
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
@@ -24,17 +24,16 @@ class DatePicker extends React.Component {
     };
 
     state = {
-        // date: this.getDate(Date.now())
         date: this.getDate(this.props.date)
     };
 
     handleDate = event => {
-        this.setState({date: event.target.value});
+        this.setState({ date: event.target.value });
         this.props.handleDate(new Date(event.target.value).getTime());
     };
 
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
         return (
             <form className={classes.container} noValidate>
                 <TextField

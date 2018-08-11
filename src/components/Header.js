@@ -61,7 +61,7 @@ class Header extends React.Component {
                     <Button variant="contained" color="primary" className={classes.button} onClick={this.onClickUpdate}>
                         {TextConstants.UPDATE}
                     </Button>
-                    <Search />
+                    <Search findItems={this.props.findItems} />
                 </div>
             </div>
         )

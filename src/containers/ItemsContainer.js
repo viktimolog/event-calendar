@@ -72,6 +72,7 @@ class ItemsContainer extends React.Component {
           handleLeft={this.handleLeft}
           addEvent={this.props.addEvent}
           handleUpdate={this.handleUpdate}
+          findItems={this.props.findItems}
         />
         <Items
           items={this.state.month}
