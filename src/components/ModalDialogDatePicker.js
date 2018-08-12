@@ -31,7 +31,6 @@ const styles = theme => ({
 });
 
 class ModalDialogDatePicker extends React.Component {
-
     state = {
         open: false,
         date: Date.now(),
@@ -43,7 +42,6 @@ class ModalDialogDatePicker extends React.Component {
     handleDate = date => this.setState({ date });
 
     handleOK = () => {
-
         if (isNaN(this.state.date)) {
             alert(TextConstants.PLEASECHOICEDATE);
             return;

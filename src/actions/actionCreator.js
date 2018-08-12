@@ -13,7 +13,6 @@ export const editEvent = event => dispatch => {
   })
 }
 
-
 export const addEvent = event => dispatch => {
   dispatch({
     type: ADD_EVENT,

@@ -16,7 +16,6 @@ const styles = theme => ({
 });
 
 class DatePicker extends React.Component {
-
     getDate = value => {
         const dateFormat = require('dateformat');
         const date = dateFormat(value, 'yyyy-mm-dd');

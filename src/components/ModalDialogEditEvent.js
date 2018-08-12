@@ -31,7 +31,6 @@ const styles = theme => ({
 });
 
 class ModalDialogEditEvent extends React.Component {
-
     state = {
         open: false,
         date: new Date(this.props.event.date),
@@ -77,11 +76,27 @@ class ModalDialogEditEvent extends React.Component {
     };
 
     render() {
-        const { classes, event } = this.props;
+        const { classes, event, i } = this.props;
+        const widthEvent = i === 6
+            ? '110%'
+            : '100%'
+
+        const styleEvent = {
+            display: 'flex',
+            width: widthEvent,
+            textAlign: 'left',
+            fontSize: '10px',
+            marginTop: '5px',
+            marginBottom: '5px'
+        }
+
         return (
             <div>
-                <Button style={{marginTop: '5px', marginBottom: '5px'}}
-                variant="contained" color="primary" className={classes.button} onClick={this.handleOpen}>
+                <Button style={styleEvent}
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={this.handleOpen}>
                     {event.text}
                 </Button>
                 <Modal
@@ -158,7 +173,6 @@ class ModalDialogEditEvent extends React.Component {
 
 ModalDialogEditEvent.propTypes = {
     classes: PropTypes.object.isRequired,
-    addEvent: PropTypes.func.isRequired,
     editEvent: PropTypes.func.isRequired,
     delEvent: PropTypes.func.isRequired,
     event: PropTypes.object.isRequired

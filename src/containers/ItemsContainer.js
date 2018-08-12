@@ -3,19 +3,17 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Items from 'components/Items'
 import Header from 'components/Header'
-
 import { getEvents, findItems, addEvent, editEvent, delEvent } from 'actions/actionCreator';
 
 const dayTime = 86400000;
 
 class ItemsContainer extends React.Component {
-
   state = {
     month: [],
     firstDayMonth: null,
     lastDayMonth: null,
-    countMonth: null,
-    year: null
+    countMonth: new Date().getMonth() + 1,
+    year: new Date().getFullYear()
   }
 
   componentDidMount() {
@@ -46,7 +44,6 @@ class ItemsContainer extends React.Component {
     if (firstDayMonth.getDay() === 0) firstDayScreen = firstDayMonth.getTime() - 6 * dayTime
 
     else firstDayScreen = firstDayMonth.getTime() - (firstDayMonth.getDay() - 1) * dayTime
-
 
     const lastDayScreen = firstDayScreen + 42 * dayTime;
 
@@ -85,7 +82,6 @@ class ItemsContainer extends React.Component {
 }
 
 ItemsContainer.propTypes = {
-  items: PropTypes.array.isRequired,
   events: PropTypes.array.isRequired,
   getEvents: PropTypes.func.isRequired,
   findItems: PropTypes.func.isRequired,

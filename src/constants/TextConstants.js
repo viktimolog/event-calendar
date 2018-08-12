@@ -14,5 +14,5 @@ export const TextConstants = {
   EXIT: 'Выход',
   PLEASECHOICEDATE: 'Пожалуйста, выберите дату',
   PLEASEINPUTEVENT: 'Пожалуйста, добавьте название события',
-  DAYOFWEEK: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+  DAYSOFWEEK: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
 }

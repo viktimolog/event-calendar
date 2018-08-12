@@ -3,159 +3,65 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-
 import Item from './Item';
 
-const styleHead = {
-  color: 'blue',
-  fontSize: '16px'
-}
-
 const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
-  },
   table: {
-    maxWidth: 2000,
+    width: '100%',
+    tableLayout: 'fixed',
+    marginTop: '10px'
   },
   cell: {
-    width: '205px',
-    height: '205px',
-    border: '1px solid'
-    // maxWidth: 20,
-    // maxHeight: 20
+    width: '189px',
+    verticalAlign: 'top',
+    height: '189px',
+    border: '1px solid',
+    borderColor: 'lightgray',
+    marginTop: 0,
+    padding: 5
   }
 });
+
+const arrI = [0, 7, 14, 21, 28, 35]
 
 const Items = ({ classes, delEvent, editEvent, events, items }) => (
   <div style={{ display: 'flex', width: '100%' }}>
     <Table className={classes.table}>
-      <TableHead>
-        <TableRow>
-          <TableCell component="th" scope="row"
-            style={styleHead}>Пн</TableCell>
-          <TableCell component="th" scope="row"
-            style={styleHead}>Вт</TableCell>
-          <TableCell component="th" scope="row"
-            style={styleHead}>Ср</TableCell>
-          <TableCell component="th" scope="row"
-            style={styleHead}>Чт</TableCell>
-          <TableCell component="th" scope="row"
-            style={styleHead}>Пт</TableCell>
-          <TableCell component="th" scope="row"
-            style={styleHead}>Сб</TableCell>
-          <TableCell component="th" scope="row"
-            style={styleHead}>Вс</TableCell>
-        </TableRow>
-      </TableHead>
       <TableBody>
-        <TableRow>
-          {items.slice(0, 7).map(item =>
-            <TableCell
-              component="th"
-              scope="row"
-              className={classes.cell}
-            >
-              <Item
-                events={events}
-                item={item}
-                editEvent={editEvent}
-                delEvent={delEvent}
-              />
-            </TableCell>
-          )}
-        </TableRow>
-        <TableRow>
-          {items.slice(7, 14).map(item =>
-            <TableCell
-              component="th"
-              scope="row"
-              className={classes.cell}
-            >
-              <Item
-                events={events}
-                item={item}
-                editEvent={editEvent}
-                delEvent={delEvent}
-              />
-            </TableCell>
-          )}
-        </TableRow>
-        <TableRow>
-          {items.slice(14, 21).map(item =>
-            <TableCell
-              component="th"
-              scope="row"
-              className={classes.cell}
-            >
-              <Item
-                events={events}
-                item={item}
-                editEvent={editEvent}
-                delEvent={delEvent}
-              />
-            </TableCell>
-          )}
-        </TableRow>
-        <TableRow>
-          {items.slice(21, 28).map(item =>
-            <TableCell
-              component="th"
-              scope="row"
-              className={classes.cell}
-            >
-              <Item
-                events={events}
-                item={item}
-                editEvent={editEvent}
-                delEvent={delEvent}
-              />
-            </TableCell>
-          )}
-        </TableRow>
-        <TableRow>
-          {items.slice(28, 35).map(item =>
-            <TableCell
-              component="th"
-              scope="row"
-              className={classes.cell}
-            >
-              <Item
-                events={events}
-                item={item}
-                editEvent={editEvent}
-                delEvent={delEvent}
-              />
-            </TableCell>
-          )}
-        </TableRow>
-        <TableRow>
-          {items.slice(35, 42).map(item =>
-            <TableCell
-              component="th"
-              scope="row"
-              className={classes.cell}
-            >
-              <Item
-                events={events}
-                item={item}
-                editEvent={editEvent}
-                delEvent={delEvent}
-              />
-            </TableCell>
-          )}
-        </TableRow>
+        {arrI.map((j, index) =>
+          <TableRow key={index}>
+            {
+              items.slice(j, j + 7).map((item, i) => {
+                // if (j === 35 && new Date(item).getDate() < 24) return null
+                return (
+                  <TableCell
+                    key={i}
+                    component="th"
+                    scope="row"
+                    className={classes.cell}
+                  >
+                    <Item
+                      j={j}
+                      i={i}
+                      key={i}
+                      events={events}
+                      item={item}
+                      editEvent={editEvent}
+                      delEvent={delEvent}
+                    />
+                  </TableCell>
+                )
+              }
+              )
+            }
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   </div>
 )
-
-// export default Items
 export default withStyles(styles)(Items);
 
 Items.propTypes = {

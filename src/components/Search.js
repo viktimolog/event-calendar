@@ -2,7 +2,6 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import IconSearch from '@material-ui/icons/Search';
 import { withStyles } from '@material-ui/core/styles';
-
 import { TextConstants } from 'constants/TextConstants';
 
 const styles = theme => ({
