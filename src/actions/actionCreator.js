@@ -44,20 +44,4 @@ export const findItems = text => dispatch => {
     type: FIND_ITEMS,
     text
   })
-  // GetItems()
-  //   .then(res =>
-  //     dispatch({
-  //       type: FIND_ITEMS,
-  //       data: res.data,
-  //       text: text
-  //     })
-  //   )
-  //   .catch(err => {
-  //     console.log(err.toString())
-  //     dispatch({
-  //       type: GET_ITEMS,
-  //       payload: []
-  //     })
-  //   }
-  //   )
 }

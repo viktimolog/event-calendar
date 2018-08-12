@@ -15,9 +15,9 @@ const styleToday = {
 }
 
 const styleNotToday = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+  // display: 'flex',
+  // justifyContent: 'center',
+  // alignItems: 'center',
   width: '35px',
   height: '35px'
 }
@@ -28,7 +28,7 @@ const getDate = value => {
   return date;
 };
 
-const OneItem = ({ delEvent, item, events, editEvent}) => {
+const Item = ({ delEvent, item, events, editEvent}) => {
 
   const isDate = (eventDate, item) => {
     if ((new Date(eventDate).getFullYear() === new Date(item).getFullYear())
@@ -89,10 +89,10 @@ const OneItem = ({ delEvent, item, events, editEvent}) => {
   )
 }
 
-OneItem.propTypes = {
+Item.propTypes = {
   item: PropTypes.object.isRequired,
   events: PropTypes.array.isRequired,
   editEvent: PropTypes.func.isRequired
 }
 
-export default OneItem;
+export default Item;

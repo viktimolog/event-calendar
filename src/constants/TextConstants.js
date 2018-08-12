@@ -13,5 +13,6 @@ export const TextConstants = {
   WINDOWEDITEVENT: 'Редактирование события: ',
   EXIT: 'Выход',
   PLEASECHOICEDATE: 'Пожалуйста, выберите дату',
-  PLEASEINPUTEVENT: 'Пожалуйста, добавьте название события'
+  PLEASEINPUTEVENT: 'Пожалуйста, добавьте название события',
+  DAYOFWEEK: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
 }

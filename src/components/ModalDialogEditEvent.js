@@ -10,8 +10,8 @@ import DatePicker from 'components/DatePicker';
 import { TextConstants } from 'constants/TextConstants';
 
 function getModalStyle() {
-    const top = 50;
-    const left = 50;
+    const top = 0;
+    const left = 0;
 
     return {
         top: `${top}%`,

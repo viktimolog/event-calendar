@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-import OneItem from './Item';
+import Item from './Item';
 
 const styleHead = {
   color: 'blue',
@@ -24,7 +24,10 @@ const styles = theme => ({
     maxWidth: 2000,
   },
   cell: {
-    maxWidth: 20,
+    width: '205px',
+    height: '205px',
+    border: '1px solid'
+    // maxWidth: 20,
     // maxHeight: 20
   }
 });
@@ -53,8 +56,12 @@ const Items = ({ classes, delEvent, editEvent, events, items }) => (
       <TableBody>
         <TableRow>
           {items.slice(0, 7).map(item =>
-            <TableCell component="th" scope="row" className={classes.cell}>
-              <OneItem
+            <TableCell
+              component="th"
+              scope="row"
+              className={classes.cell}
+            >
+              <Item
                 events={events}
                 item={item}
                 editEvent={editEvent}
@@ -65,8 +72,12 @@ const Items = ({ classes, delEvent, editEvent, events, items }) => (
         </TableRow>
         <TableRow>
           {items.slice(7, 14).map(item =>
-            <TableCell component="th" scope="row">
-              <OneItem
+            <TableCell
+              component="th"
+              scope="row"
+              className={classes.cell}
+            >
+              <Item
                 events={events}
                 item={item}
                 editEvent={editEvent}
@@ -77,8 +88,12 @@ const Items = ({ classes, delEvent, editEvent, events, items }) => (
         </TableRow>
         <TableRow>
           {items.slice(14, 21).map(item =>
-            <TableCell component="th" scope="row">
-              <OneItem
+            <TableCell
+              component="th"
+              scope="row"
+              className={classes.cell}
+            >
+              <Item
                 events={events}
                 item={item}
                 editEvent={editEvent}
@@ -89,8 +104,12 @@ const Items = ({ classes, delEvent, editEvent, events, items }) => (
         </TableRow>
         <TableRow>
           {items.slice(21, 28).map(item =>
-            <TableCell component="th" scope="row">
-              <OneItem
+            <TableCell
+              component="th"
+              scope="row"
+              className={classes.cell}
+            >
+              <Item
                 events={events}
                 item={item}
                 editEvent={editEvent}
@@ -101,8 +120,12 @@ const Items = ({ classes, delEvent, editEvent, events, items }) => (
         </TableRow>
         <TableRow>
           {items.slice(28, 35).map(item =>
-            <TableCell component="th" scope="row">
-              <OneItem
+            <TableCell
+              component="th"
+              scope="row"
+              className={classes.cell}
+            >
+              <Item
                 events={events}
                 item={item}
                 editEvent={editEvent}
@@ -113,8 +136,12 @@ const Items = ({ classes, delEvent, editEvent, events, items }) => (
         </TableRow>
         <TableRow>
           {items.slice(35, 42).map(item =>
-            <TableCell component="th" scope="row">
-              <OneItem
+            <TableCell
+              component="th"
+              scope="row"
+              className={classes.cell}
+            >
+              <Item
                 events={events}
                 item={item}
                 editEvent={editEvent}
