@@ -38,7 +38,7 @@ class Header extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <div style={{ display: 'flex', width: '1400px', justifyContent: 'flex-start', alignItems: 'center' }}>
+            <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-start', alignItems: 'center' }}>
                 <div style={{ display: 'flex', width: '40%', justifyContent: 'flex-start', alignItems: 'center' }}>
                     <Button color="primary" style={{ fontSize: '16px' }}>
                         {TextConstants.TODAY}
