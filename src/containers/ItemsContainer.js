@@ -47,8 +47,11 @@ class ItemsContainer extends React.Component {
 
     const lastDayScreen = firstDayScreen + 42 * dayTime;
 
-    for (let i = firstDayScreen; i < lastDayScreen; i += dayTime)
-      month.push(i);
+    for (let i = firstDayScreen; i < lastDayScreen; i += dayTime) {
+      new Date(date.getMonth() === 9 && (new Date(date.getDate() >= 24 || new Date(date.getDate() <= 31))))
+        ? month.push(i + dayTime / 24)
+        : month.push(i)
+    }
 
     this.setState({
       month,
